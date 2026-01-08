@@ -15,8 +15,8 @@ export default function AdminDashboard() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="mt-2 text-sm text-gray-600">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Dashboard</h1>
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           Welcome back, {user?.name}! Here's what's happening today.
         </p>
       </div>
@@ -26,15 +26,15 @@ export default function AdminDashboard() {
         {stats.map((item) => (
           <div
             key={item.name}
-            className="bg-white overflow-hidden shadow rounded-lg"
+            className="bg-white dark:bg-gray-800 overflow-hidden shadow dark:shadow-gray-900/50 rounded-lg border border-transparent dark:border-gray-700"
           >
             <div className="p-5">
               <div className="flex items-center">
                 <div className="flex-1">
-                  <dt className="text-sm font-medium text-gray-500 truncate">
+                  <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
                     {item.name}
                   </dt>
-                  <dd className="mt-1 text-3xl font-semibold text-gray-900">
+                  <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">
                     {item.value}
                   </dd>
                 </div>
@@ -42,13 +42,13 @@ export default function AdminDashboard() {
               <div className="mt-4">
                 <span
                   className={`inline-flex items-center text-sm font-semibold ${item.changeType === 'positive'
-                      ? 'text-green-600'
-                      : 'text-red-600'
+                    ? 'text-green-600 dark:text-green-400'
+                    : 'text-red-600 dark:text-red-400'
                     }`}
                 >
                   {item.change}
                 </span>
-                <span className="ml-2 text-sm text-gray-500">vs last month</span>
+                <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">vs last month</span>
               </div>
             </div>
           </div>
@@ -56,9 +56,9 @@ export default function AdminDashboard() {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white shadow rounded-lg">
+      <div className="bg-white dark:bg-gray-800 shadow dark:shadow-gray-900/50 rounded-lg border border-transparent dark:border-gray-700">
         <div className="px-4 py-5 sm:p-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
+          <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100 mb-4">
             Recent Activity
           </h3>
           <div className="flow-root">
@@ -73,26 +73,26 @@ export default function AdminDashboard() {
                   <div className="relative pb-8">
                     {eventIdx !== arr.length - 1 ? (
                       <span
-                        className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
+                        className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-gray-700"
                         aria-hidden="true"
                       />
                     ) : null}
                     <div className="relative flex space-x-3">
                       <div>
-                        <span className="h-8 w-8 rounded-full bg-indigo-500 flex items-center justify-center ring-8 ring-white">
+                        <span className="h-8 w-8 rounded-full bg-indigo-500 dark:bg-indigo-600 flex items-center justify-center ring-8 ring-white dark:ring-gray-800">
                           <span className="text-white text-xs">✓</span>
                         </span>
                       </div>
                       <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                         <div>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
                             {event.action}{' '}
-                            <span className="font-medium text-gray-900">
+                            <span className="font-medium text-gray-900 dark:text-gray-100">
                               {event.user}
                             </span>
                           </p>
                         </div>
-                        <div className="whitespace-nowrap text-right text-sm text-gray-500">
+                        <div className="whitespace-nowrap text-right text-sm text-gray-500 dark:text-gray-400">
                           {event.time}
                         </div>
                       </div>

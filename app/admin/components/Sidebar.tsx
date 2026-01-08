@@ -38,8 +38,8 @@ interface NavigationItem {
 
 const navigation: NavigationItem[] = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { 
-    name: 'Users', 
+  {
+    name: 'Users',
     icon: Users,
     children: [
       { name: 'All Users', href: '/admin/users', icon: List },
@@ -47,8 +47,8 @@ const navigation: NavigationItem[] = [
       { name: 'User Roles', href: '/admin/users/roles', icon: Shield },
     ]
   },
-  { 
-    name: 'Settings', 
+  {
+    name: 'Settings',
     icon: Settings,
     children: [
       { name: 'General', href: '/admin/settings', icon: Wrench },
@@ -56,12 +56,12 @@ const navigation: NavigationItem[] = [
       { name: 'Notifications', href: '/admin/settings/notifications', icon: Bell },
     ]
   },
-  { 
-    name: 'File Manager', 
+  {
+    name: 'File Manager',
     icon: Folder,
     children: [
       { name: 'All Files', href: '/admin/files', icon: FileText },
-      { 
+      {
         name: 'Media',
         icon: Folder,
         children: [
@@ -96,7 +96,7 @@ function NavItem({ item, sidebarOpen, pathname, setMobileMenuOpen, depth = 0, is
   const handleClick = () => {
     if (hasChildren) {
       const newOpenItems = new Set(openItems);
-      
+
       if (isOpen) {
         // Close this item and all its children
         const itemsToRemove = Array.from(openItems).filter(path => path.startsWith(currentPath));
@@ -106,7 +106,7 @@ function NavItem({ item, sidebarOpen, pathname, setMobileMenuOpen, depth = 0, is
         const pathParts = currentPath.split('.');
         const parentPath = pathParts.slice(0, -1).join('.');
         const siblingPrefix = parentPath ? `${parentPath}.` : '';
-        
+
         Array.from(openItems).forEach(path => {
           const parts = path.split('.');
           const pathParent = parts.slice(0, -1).join('.');
@@ -114,11 +114,11 @@ function NavItem({ item, sidebarOpen, pathname, setMobileMenuOpen, depth = 0, is
             newOpenItems.delete(path);
           }
         });
-        
+
         // Open this item
         newOpenItems.add(currentPath);
       }
-      
+
       setOpenItems(newOpenItems);
     } else if (item.href) {
       setMobileMenuOpen(false);
@@ -131,12 +131,12 @@ function NavItem({ item, sidebarOpen, pathname, setMobileMenuOpen, depth = 0, is
       {depth > 0 && sidebarOpen && (
         <>
           {/* Vertical line */}
-          <div className={`absolute left-0 top-0 w-px bg-gray-300 ${isLast ? 'h-5' : 'h-full'}`} />
+          <div className={`absolute left-0 top-0 w-px bg-gray-300 dark:bg-gray-600 ${isLast ? 'h-5' : 'h-full'}`} />
           {/* Horizontal line */}
-          <div className="absolute left-0 top-5 w-4 h-px bg-gray-300" />
+          <div className="absolute left-0 top-5 w-4 h-px bg-gray-300 dark:bg-gray-600" />
         </>
       )}
-      
+
       {item.href && !hasChildren ? (
         <Link
           href={item.href}
@@ -145,8 +145,8 @@ function NavItem({ item, sidebarOpen, pathname, setMobileMenuOpen, depth = 0, is
             relative group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer
             ${depth > 0 && sidebarOpen ? 'ml-4' : ''}
             ${isActive
-              ? 'bg-indigo-100 text-indigo-900'
-              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+              ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-900 dark:text-indigo-300'
+              : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100'
             }
           `}
           title={!sidebarOpen ? item.name : undefined}
@@ -162,8 +162,8 @@ function NavItem({ item, sidebarOpen, pathname, setMobileMenuOpen, depth = 0, is
               relative group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer
               ${depth > 0 && sidebarOpen ? 'ml-4 w-[calc(100%-1rem)]' : 'w-full'}
               ${isParentActive
-                ? 'bg-indigo-50 text-indigo-900'
-                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-900 dark:text-indigo-300'
+                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100'
               }
             `}
             title={!sidebarOpen ? item.name : undefined}
@@ -209,15 +209,15 @@ export default function Sidebar({ sidebarOpen, mobileMenuOpen, setMobileMenuOpen
   // Helper function to find all parent paths for a given pathname
   const findParentPaths = (items: NavigationItem[], currentPath: string, parentPath = ''): string[] => {
     const paths: string[] = [];
-    
+
     for (const item of items) {
       const itemPath = parentPath ? `${parentPath}.${item.name}` : item.name;
-      
+
       if (item.href === currentPath) {
         // Found the active item, return all parent paths
         return parentPath ? [parentPath] : [];
       }
-      
+
       if (item.children) {
         const childPaths = findParentPaths(item.children, currentPath, itemPath);
         if (childPaths.length > 0 || item.children.some(child => child.href === currentPath)) {
@@ -226,7 +226,7 @@ export default function Sidebar({ sidebarOpen, mobileMenuOpen, setMobileMenuOpen
         }
       }
     }
-    
+
     return paths;
   };
 
@@ -252,21 +252,21 @@ export default function Sidebar({ sidebarOpen, mobileMenuOpen, setMobileMenuOpen
       <aside
         className={`
           fixed lg:static inset-y-0 left-0 z-50
-          lg:bg-white bg-white/95 backdrop-blur-md shadow-lg transition-all duration-300 ease-in-out border-r border-gray-200
+          lg:bg-white lg:dark:bg-gray-800 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md shadow-lg transition-all duration-300 ease-in-out border-r border-gray-200 dark:border-gray-700
           ${sidebarOpen ? 'w-70' : 'w-20'}
           ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           flex flex-col
         `}
       >
         {/* Sidebar Header */}
-        <div className="h-16 flex items-center px-4">
+        <div className="h-24 flex items-center px-4">
           {sidebarOpen ? (
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-md">
+              <div className="w-10 h-10 bg-linear-to-br from-indigo-600 to-indigo-800 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-md">
                 AP
               </div>
               <div>
-                <h1 className="font-bold text-gray-900 text-lg leading-tight">Admin Panel</h1>
+                <h1 className="font-bold text-gray-900 dark:text-gray-100 text-lg leading-tight">Admin Panel</h1>
               </div>
             </div>
           ) : (
@@ -280,7 +280,7 @@ export default function Sidebar({ sidebarOpen, mobileMenuOpen, setMobileMenuOpen
         <nav className="flex-1 px-2 py-4 overflow-y-auto scrollbar-hide">
           {sidebarOpen && (
             <div className="px-3 mb-3">
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Menu</p>
+              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Menu</p>
             </div>
           )}
           <div className="space-y-1">
