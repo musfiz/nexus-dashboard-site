@@ -20,6 +20,7 @@ import {
   Image,
   Video,
   Music,
+  Table,
   type LucideIcon
 } from 'lucide-react';
 
@@ -38,6 +39,7 @@ interface NavigationItem {
 
 const navigation: NavigationItem[] = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { name: 'Data Table', href: '/admin/datatable', icon: Table },
   {
     name: 'Users',
     icon: Users,
@@ -259,18 +261,18 @@ export default function Sidebar({ sidebarOpen, mobileMenuOpen, setMobileMenuOpen
         `}
       >
         {/* Sidebar Header */}
-        <div className="h-24 flex items-center px-4">
+        <div className="h-16 flex items-center px-4">
           {sidebarOpen ? (
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-linear-to-br from-indigo-600 to-indigo-800 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-md">
                 AP
               </div>
               <div>
-                <h1 className="font-bold text-gray-900 dark:text-gray-100 text-lg leading-tight">Admin Panel</h1>
+                <h1 className="font-bold text-gray-900 dark:text-gray-100 text-2xl leading-tight">Admin Panel</h1>
               </div>
             </div>
           ) : (
-            <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md mx-auto">
+            <div className="w-10 h-10 bg-linear-to-br from-indigo-600 to-indigo-800 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md mx-auto">
               AP
             </div>
           )}
